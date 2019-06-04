@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        title Traveling
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+        <!--vue-->
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js'></script>
+        <!--jquery-->
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js'></script>
+        <!--css style-->
+        link(rel="stylesheet", href="./css/trvel.css")
+        
+    body
+        #app
+            <!--navbar-->
+            .nav
+                .nav-position
+                    span.menu-icon
+                        <i class="fas fa-align-left"></i>
+                    h2 The Chicken Of Traveling
+                    .cart-button(@click="showCart")
+                        span.nav-icon
+                            <i class="fas fa-cart-arrow-down"></i>
+                        .cart-item-number {{total_item}}
+            <!--End of navbar-->
+            .header
+            <!--product-->
+            section.products
+                .section-title
+                    h2 Your destination
+                .products-center
+                    <!--single product-->
+                    article.product(v-for="(item,id) in products")
+                        .img-container
+                            img.product-img(:src="item.fields.image", alt="product")
+
+                            <button class='bag-button' @click=addcart(id)><i class="fas fa-shopping-basket"></i>加入購物車</button>
+
+                        h3 {{item.fields.title}}
+                        h4 {{item.fields.price}}
+                    <!--end of single product-->
+
+            <!--end of product-->
+            <!--cart-->
+            .cart-overlay
+                .cart#cart
+                    span.cart-close(@click="hideCart")
+                        <i class="fas fa-window-close"></i>
+                    h2 購物車清單
+                    .cart-content(v-for="(item,index) in cart")
+                        .cart-item
+                            img(:src="item.fields.image", alt="cart-item")
+                            div
+                                h4 {{item.fields.title}}
+                                h5 {{item.fields.price}}
+                                span.remove-item(@click="singleclear(index)") 移除
+                            div
+                                <i class="fas fa-chevron-up" @click="additem(index)"></i>
+                                p.item-amount {{item.fields.amount}}
+                                <i class="fas fa-chevron-down" @click="loweritem(index)"></i>
+                    .cart-footer
+                        h3 總額 : $ <span class="cart-total">{{total}}</span>
+                        button.clear-cart.banner-btn(@click="clearitem") Clear
+            <!--end of cart-->
+        script(src="./travel.js")

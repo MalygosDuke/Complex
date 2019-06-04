@@ -1,0 +1,220 @@
+$primary: #ffaa80
+$mainColor_black: #222
+$mainColor_grey: #f2f2f2
+//$mainGrey: #ececec
+$Spacing: 0.1rem
+$cssTransition: all 0.5s linear
+
+
+@mixin size($w,$h)
+    width: $w
+    height: $h
+
+@mixin banner_btn_f()
+    padding: 1rem 3rem
+    text-transform: uppercase
+    letter-spacing: $Spacing
+    font-size: 1rem
+    background-color: $primary
+    color: $mainColor_black
+    border: 1px solid $primary
+    transition: $cssTransition
+    cursor: pointer
+
+@media only screen and (min-width: 768px)
+    #cart
+        width: 30vw
+        min-width: 450px
+
+
+*
+    box-sizing: border-box
+    margin: 0
+    padding: 0
+    //border: 1px solid black
+
+body
+    background-color: $mainColor_grey
+    color: $mainColor_black
+
+//navbar
+.nav
+    position: stickey
+    top: 0
+    +size(100%,70px)
+    display: flex
+    align-items: center
+    background-color: rgb(231,226,221)
+    z-index: 1
+    .nav-position
+        width: 100%
+        max-width: 1180px
+        margin: 0 auto
+        display: flex
+        align-content: center
+        justify-content: space-between
+        padding: 0 2rem
+        .menu-icon
+            font-size: 1.5rem
+        .cart-button
+            position: relative
+            cursor: pointer
+            .nav-icon
+                font-size: 1.5rem
+            .cart-item-number
+                position: absolute
+                top: -12px
+                right: -10px
+                background-color: $primary
+                padding: 0 5px
+                border-radius: 25%
+
+//header start
+.header
+    height: 1024px
+    background: url('../image/location_1.jpg') center/cover no-repeat
+    display: flex
+    justify-content: center
+    align-items: center
+
+//product
+.products
+    padding: 4rem
+    .section-title
+        h2
+            text-align: center
+            font-size: 2.4rem
+            text-transform: capitalize
+            margin-bottom: 5rem
+            letter-spacing: $Spacing
+    .products-center
+        width: 90vw
+        margin: 20px auto
+        max-width: 1180px
+        display: grid
+        grid-template-columns: repeat(auto-fit,minmax(260px,1fr))
+        grid-column-gap: 1.5rem
+        grid-row-gap: 2rem
+        .product
+            .img-container
+                position: relative
+                overflow: hidden
+                .bag-button
+                    position: absolute
+                    top: 70%
+                    right: 0
+                    background-color: $primary
+                    border: none
+                    text-transform: uppercase
+                    padding: 0.5rem,0.7rem
+                    letter-spacing: $Spacing
+                    font-weight: bold
+                    transition: $cssTransition
+                    transform: translateX(100%)
+                    cursor: pointer
+                    &:hover
+                        color: $mainColor_grey
+                    .fa-shopping-basket
+                        margin-right: 0.5rem
+                &:hover
+                    transform: translateX(0)
+                    .bag-button
+                        transform: translateX(0)
+                .product-img
+                    display: block
+                    width: 100%
+                    min-height: 12rem
+                    transition: $cssTransition
+                &:hover
+                    opacity: 0.7
+                    .product-img
+                        opacity: 0.7
+        .product
+            h3
+                text-transform: capitalize
+                font-size: 1.1rem
+                margin-top: 1rem
+                letter-spacing: $Spacing
+                text-align: center
+            h4
+                margin-top: 0.7rem
+                letter-spacing: $Spacing
+                color: $primary
+                text-align: center
+
+//cart setting
+.cart-overlay
+    position: fixed
+    top: 0
+    right: 0
+    width: 100%
+    height: 100%
+    background: rgba(240,157,81,0.6)
+    transition: $cssTransition
+    z-index: 2
+    visibility: hidden
+    .cart
+        position: fixed
+        top: 0
+        right: 0
+        width: 100%
+        height: 100%
+        background-color: rgb(231,226,221)
+        padding: 1.5rem
+        overflow: scroll
+        z-index: 3
+        transition: $cssTransition
+    .showcart
+            transform: translateX(0%)
+.transparentBcg
+    visibility: visible
+
+//cart page content
+.cart
+    .cart-close
+        font-size: 1.6rem
+        cursor: pointer
+    h2
+        text-transform: capitalize
+        text-align: center
+        letter-spacing: $Spacing
+        margin-bottom: 2rem
+    .cart-content
+        .cart-item
+            display: grid
+            align-items: center
+            grid-template-columns: auto 1fr auto
+            grid-column-gap: 1.5rem
+            margin: 1.5rem 0
+            img
+                width: 75px
+                height: 75px
+            div
+                text-align: center
+            h4
+                font-size: 0.85rem
+                text-transform: capitalize
+                letter-spacing: $Spacing
+            h5
+                margin: 0.5rem 0
+                letter-spacing: $Spacing
+            .item-amount
+                text-align: center
+            .remove-item
+                color: grey
+                cursor: pointer
+            .fa-chevron-up,.fa-chevron-down
+                color: $primary
+                cursor: pointer
+    .cart-footer
+        margin-top: 2rem
+        letter-spacing: $Spacing
+        text-align: center
+        h3
+            text-transform: capitalize
+            margin-bottom: 1rem
+        .banner-btn
+            +banner_btn_f()
+            &:hover
+                background-color: transparent
+                color: $primary
