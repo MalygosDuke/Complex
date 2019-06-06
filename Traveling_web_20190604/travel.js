@@ -105,6 +105,7 @@ let vm = new Vue({
       this.showCart();
       //計算總和
       this.totalprice();
+      this.control_item_number_now();
     },
     totalprice() {
       let totalprice = 0;
@@ -119,12 +120,14 @@ let vm = new Vue({
       this.cart = [];
       //restart calcalate totalprice
       this.totalprice();
+      this.control_item_number_now();
     },
     singleclear: function(index) {
       //查詢cart
       this.cart.splice(index, 1);
       //restart calcalate totalprice
       this.totalprice();
+      this.control_item_number_now();
     },
     additem: function(index) {
       //增加數量
@@ -134,6 +137,7 @@ let vm = new Vue({
       //console.log(this.cart[index]);
       //計算總價格
       this.totalprice();
+      this.control_item_number_now();
     },
     loweritem: function(index) {
       let tempnumber = this.cart[index].fields.amount;
@@ -144,17 +148,20 @@ let vm = new Vue({
         this.cart.splice(index, 1);
       }
       this.totalprice();
-    }
-  },
-  computed: {
+      this.control_item_number_now();
+    },
     control_item_number_now() {
       let cart = this.cart;
-      let totalnumber = 0;
-      cart.forEach(item => {
-        totalnumber += item.fields.amount;
-        this.total_item = totalnumber;
-        console.log("successful");
-      });
+      if (cart.length !== 0) {
+        let totalnumber = 0;
+        cart.forEach(item => {
+          totalnumber += item.fields.amount;
+          this.total_item = totalnumber;
+          console.log("successful");
+        });
+      } else {
+        this.total_item = 0;
+      }
     }
   }
 });
