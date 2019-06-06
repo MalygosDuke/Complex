@@ -31,7 +31,7 @@
           <article v-for="(item,id) in products" class="product">
             <div class="img-container"><img :src="item.fields.image" alt="product" class="product-img"/><button class='bag-button' @click=addcart(id)><i class="fas fa-shopping-basket"></i>加入購物車</button></div>
             <h3>{{item.fields.title}}</h3>
-            <h4>{{item.fields.price}}</h4>
+            <h4>$ {{item.fields.price}}</h4>
           </article><!--end of single product-->
         </div>
       </section><!--end of product-->

@@ -116,6 +116,8 @@ let vm = new Vue({
       this.total = totalprice;
     },
     clearitem() {
+      //將原本cart中index的amount歸1
+      this.cart.forEach(item => (item.fields.amount = 1));
       //將cart陣列清除 --> display
       this.cart = [];
       //restart calcalate totalprice
@@ -123,6 +125,8 @@ let vm = new Vue({
       this.control_item_number_now();
     },
     singleclear: function(index) {
+      //將原本cart中index的amount歸1
+      this.cart[index].fields.amount = 1;
       //查詢cart
       this.cart.splice(index, 1);
       //restart calcalate totalprice
