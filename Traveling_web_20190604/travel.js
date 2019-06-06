@@ -98,14 +98,41 @@ let vm = new Vue({
       $(".cart-overlay").css("visibility", "hidden");
       $(".cart").css("transform", "translateX(100%)");
     },
-    addcart: function(id) {
-      //將物品加入cart陣列
-      this.cart.push(this.products[id]);
-      //打開清單
-      this.showCart();
-      //計算總和
-      this.totalprice();
-      this.control_item_number_now();
+    addcart: function(index, item_id) {
+      if (this.cart.length !== 0) {
+        //找出是否存在購物清單
+        let result = this.cart.filter(item => {
+          return item.number.id === item_id;
+        });
+        //判斷有無找到重複物品
+        if (Array.isArray(result) && result.length == 0) {
+          //將物品加入cart陣列
+          this.cart.push(this.products[index]);
+          //打開清單
+          this.showCart();
+          //計算總和
+          this.totalprice();
+          this.control_item_number_now();
+        } else {
+          result = result[0].number.id;
+          this.cart.forEach(item => {
+            if (item.number.id === result) {
+              item.fields.amount += 1;
+            }
+          });
+          this.showCart();
+          this.totalprice();
+          this.control_item_number_now();
+        }
+      } else {
+        //將物品加入cart陣列
+        this.cart.push(this.products[index]);
+        //打開清單
+        this.showCart();
+        //計算總和
+        this.totalprice();
+        this.control_item_number_now();
+      }
     },
     totalprice() {
       let totalprice = 0;

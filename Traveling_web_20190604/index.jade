@@ -37,7 +37,7 @@ html(lang="en")
                         .img-container
                             img.product-img(:src="item.fields.image", alt="product")
 
-                            <button class='bag-button' @click=addcart(id)><i class="fas fa-shopping-basket"></i>加入購物車</button>
+                            <button class='bag-button' @click=addcart(id,item.number.id)><i class="fas fa-shopping-basket"></i>加入購物車</button>
 
                         h3 {{item.fields.title}}
                         h4 $ {{item.fields.price}}
